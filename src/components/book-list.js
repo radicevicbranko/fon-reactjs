@@ -10,7 +10,6 @@ class BookList extends Component {
             return (
               <Col xs={12} sm={6} md={4}>
                 <Book book={x} />
-                <Clearfix visibleLgBlock />
               </Col>
             );
           })}
