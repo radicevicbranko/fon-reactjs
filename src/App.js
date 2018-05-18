@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import "./App.css";
+import Data from "./books.json";
+import BookList from "./components/books-list";
 
 class App extends Component {
   render() {
-    const element = <div className="App">Hello, world!</div>;
-    return element;
+    return (
+      <div className="App">
+        <BookList books={Data.books} />
+      </div>
+    );
   }
 }
 

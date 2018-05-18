@@ -1,0 +1,96 @@
+{
+  "error": "0",
+  "total": "58",
+  "page": "1",
+  "books": [
+    {
+      "title": "Pro React",
+      "subtitle":
+        "Build complex front-end applications in a composable way with React",
+      "isbn13": "9781484212615",
+      "price": "$30.09",
+      "image": "https://itbook.store/img/books/9781484212615.png",
+      "url": "https://itbook.store/books/9781484212615"
+    },
+    {
+      "title": "React Native for iOS Development",
+      "subtitle":
+        "Harness the power of React and JavaScript to build stunning iOS applications",
+      "isbn13": "9781484213964",
+      "price": "$42.92",
+      "image": "https://itbook.store/img/books/9781484213964.png",
+      "url": "https://itbook.store/books/9781484213964"
+    },
+    {
+      "title": "Front-End Reactive Architectures",
+      "subtitle":
+        "Explore the Future of the Front-End using Reactive JavaScript Frameworks and Libraries",
+      "isbn13": "9781484231791",
+      "price": "$24.96",
+      "image": "https://itbook.store/img/books/9781484231791.png",
+      "url": "https://itbook.store/books/9781484231791"
+    },
+    {
+      "title": "Learning React",
+      "subtitle": "Functional Web Development with React and Redux",
+      "isbn13": "9781491954621",
+      "price": "$40.58",
+      "image": "https://itbook.store/img/books/9781491954621.png",
+      "url": "https://itbook.store/books/9781491954621"
+    },
+    {
+      "title": "React Quickly",
+      "subtitle": "Painless web apps with React, JSX, Redux, and GraphQL",
+      "isbn13": "9781617293344",
+      "price": "$32.40",
+      "image": "https://itbook.store/img/books/9781617293344.png",
+      "url": "https://itbook.store/books/9781617293344"
+    },
+    {
+      "title": "React.js Essentials",
+      "subtitle":
+        "A fast-paced guide to designing and building scalable and maintainable web apps with React.js",
+      "isbn13": "9781783551620",
+      "price": "$23.99",
+      "image": "https://itbook.store/img/books/9781783551620.png",
+      "url": "https://itbook.store/books/9781783551620"
+    },
+    {
+      "title": "Mastering React",
+      "subtitle":
+        "Master the art of building modern web applications using React",
+      "isbn13": "9781783558568",
+      "price": "$35.99",
+      "image": "https://itbook.store/img/books/9781783558568.png",
+      "url": "https://itbook.store/books/9781783558568"
+    },
+    {
+      "title": "Clojure Reactive Programming",
+      "subtitle":
+        "Design and implement highly reusable reactive applications by integrating different frameworks with Clojure",
+      "isbn13": "9781783986668",
+      "price": "$29.99",
+      "image": "https://itbook.store/img/books/9781783986668.png",
+      "url": "https://itbook.store/books/9781783986668"
+    },
+    {
+      "title":
+        "ReactJS by Example: Building Modern Web Applications with React",
+      "subtitle":
+        "Get up and running with ReactJS by developing five cutting-edge and responsive projects",
+      "isbn13": "9781785289644",
+      "price": "$34.99",
+      "image": "https://itbook.store/img/books/9781785289644.png",
+      "url": "https://itbook.store/books/9781785289644"
+    },
+    {
+      "title": "Getting Started with React Native",
+      "subtitle":
+        "Learn to build modern native iOS and Android applications using JavaScript and the incredible power of React",
+      "isbn13": "9781785885181",
+      "price": "$23.99",
+      "image": "https://itbook.store/img/books/9781785885181.png",
+      "url": "https://itbook.store/books/9781785885181"
+    }
+  ]
+}
