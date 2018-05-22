@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Panel, Table, Image, Button, Grid, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import Rating from "react-rating";
+import { Link } from "react-router-dom";
 class BookDetails extends Component {
   constructor(props) {
     super(props);
@@ -11,7 +12,9 @@ class BookDetails extends Component {
   }
 
   async componentDidMount() {
-    const response = await axios.get("/api/1.0/books/" + this.props.id);
+    const response = await axios.get(
+      "/api/1.0/books/" + this.props.match.params.id
+    );
     this.setState({
       book: response.data
     });
@@ -61,7 +64,9 @@ class BookDetails extends Component {
             </Grid>
           </Panel.Body>
           <Panel.Footer>
-            <Button onClick={this.props.goBack}>Go Back</Button>
+            <Link to="/">
+              <Button>Go Back</Button>
+            </Link>
           </Panel.Footer>
         </Panel>
       );

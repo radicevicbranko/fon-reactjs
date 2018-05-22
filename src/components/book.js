@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Panel, Image, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 class Book extends Component {
   render() {
@@ -13,12 +14,9 @@ class Book extends Component {
           {this.props.book.subtitle}
         </Panel.Body>
         <Panel.Footer>
-          <Button
-            bsStyle="primary"
-            onClick={() => this.props.onViewDetails(this.props.book)}
-          >
-            View details
-          </Button>
+          <Link to={"/book/" + this.props.book.isbn13}>
+            <Button bsStyle="primary">View details</Button>
+          </Link>
         </Panel.Footer>
       </Panel>
     );
