@@ -3,8 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
     "react": "^16.3.2",
+    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.3.2",
+    "react-rating": "^1.1.2",
     "react-scripts": "1.1.4"
   },
   "scripts": {
@@ -12,5 +17,15 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "proxy": {
+    "/api": {
+      "target": "https://api.itbook.store",
+      "pathRewrite": {
+        "^/api": ""
+      },
+      "changeOrigin": true,
+      "logLevel": "debug"
+    }
   }
 }

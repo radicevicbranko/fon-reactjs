@@ -3,3 +3,18 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.book {
+}
+.book-description {
+  height: 100px;
+}
+.book-header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.fa-star {
+  color: #F3BE41;
+}
