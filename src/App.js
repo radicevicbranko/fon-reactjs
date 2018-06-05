@@ -13,6 +13,7 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 import { Grid, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 class App extends Component {
   constructor() {
@@ -40,19 +41,21 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        {this.showNavbar()}
-        <Grid>
-          <Row>
-            <Col xs={12} md={2}>
-              {this.showLeftMenu()}
-            </Col>
-            <Col xs={12} md={10}>
-              {this.showContent()}
-            </Col>
-          </Row>
-        </Grid>
-      </div>
+      <Router>
+        <div className="App">
+          {this.showNavbar()}
+          <Grid>
+            <Row>
+              <Col xs={12} md={2}>
+                {this.showLeftMenu()}
+              </Col>
+              <Col xs={12} md={10}>
+                {this.showContent()}
+              </Col>
+            </Row>
+          </Grid>
+        </div>
+      </Router>
     );
   }
   selectBooks = key => {
@@ -66,8 +69,12 @@ class App extends Component {
         activeKey={this.state.term}
         onSelect={this.selectBooks}
       >
-        <NavItem eventKey={"react"}>React JS</NavItem>
-        <NavItem eventKey={"javascript"}>Java Script</NavItem>
+        <NavItem eventKey={"react"} componentClass={Link} to="/" href="/">
+          React JS
+        </NavItem>
+        <NavItem eventKey={"javascript"} componentClass={Link} to="/" href="/">
+          Java Script
+        </NavItem>
       </Nav>
     );
   };
@@ -117,19 +124,17 @@ class App extends Component {
       return <div>Loading...</div>;
     }
     return (
-      <Router>
-        <div>
-          <Switch>
-            <Route
-              path="/book/:id"
-              component={props => <BookDetails {...props} />}
-            />
-            <Route
-              component={() => <BookList books={this.state.books.books} />}
-            />
-          </Switch>
-        </div>
-      </Router>
+      <div>
+        <Switch>
+          <Route
+            path="/book/:id"
+            component={props => <BookDetails {...props} />}
+          />
+          <Route
+            component={() => <BookList books={this.state.books.books} />}
+          />
+        </Switch>
+      </div>
     );
   };
 }
