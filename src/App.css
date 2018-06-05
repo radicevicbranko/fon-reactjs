@@ -31,3 +31,16 @@
   }
 }
 
+.icon-wrapper {
+  position: relative;
+}
+.fa.fa-shopping-cart {
+  font-size: 30px;
+}
+
+.icon-wrapper .badge {
+  top: -20px;
+  right: -20px;
+  background-color: rgb(228, 178, 15);
+  position: absolute;
+}
