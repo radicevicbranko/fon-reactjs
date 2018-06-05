@@ -1,26 +1,74 @@
 import React, { Component } from "react";
 import "./App.css";
-import Data from "./books.json";
 import BookList from "./components/books-list";
 import BookDetails from "./components/book-details";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Navbar, FormGroup, FormControl, Button } from "react-bootstrap";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  Navbar,
+  FormGroup,
+  FormControl,
+  Button,
+  Nav,
+  NavItem
+} from "react-bootstrap";
+import axios from "axios";
+import { Grid, Row, Col } from "react-bootstrap";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      currentBookId: null
+      currentBookId: null,
+      books: null,
+      term: "react"
     };
   }
+
+  async componentDidMount() {
+    await this.setTerm(this.state.term);
+  }
+
+  setTerm = async term => {
+    const response = await axios.get("/api/1.0/search/" + term);
+    this.setState({
+      books: response.data,
+      term: term
+    });
+  };
+
   render() {
     return (
       <div className="App">
         {this.showNavbar()}
-        {this.showContent()}
+        <Grid>
+          <Row>
+            <Col xs={12} md={2}>
+              {this.showLeftMenu()}
+            </Col>
+            <Col xs={12} md={10}>
+              {this.showContent()}
+            </Col>
+          </Row>
+        </Grid>
       </div>
     );
   }
+  selectBooks = key => {
+    this.setTerm(key);
+  };
+  showLeftMenu = () => {
+    return (
+      <Nav
+        bsStyle="pills"
+        stacked
+        activeKey={this.state.term}
+        onSelect={this.selectBooks}
+      >
+        <NavItem eventKey={"react"}>React JS</NavItem>
+        <NavItem eventKey={"javascript"}>Java Script</NavItem>
+      </Nav>
+    );
+  };
 
   showNavbar = () => {
     return (
@@ -52,18 +100,21 @@ class App extends Component {
     );
   };
   showContent = () => {
+    if (!this.state.books) {
+      return <div>Loading...</div>;
+    }
     return (
       <Router>
         <div>
-          <Route
-            exact
-            path="/"
-            component={() => <BookList books={Data.books} />}
-          />
-          <Route
-            path="/book/:id"
-            component={props => <BookDetails {...props} />}
-          />
+          <Switch>
+            <Route
+              path="/book/:id"
+              component={props => <BookDetails {...props} />}
+            />
+            <Route
+              component={() => <BookList books={this.state.books.books} />}
+            />
+          </Switch>
         </div>
       </Router>
     );
