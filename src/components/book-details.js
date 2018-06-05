@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Panel, Table, Image, Button, Row, Col } from "react-bootstrap";
+import {
+  Panel,
+  Table,
+  Image,
+  Button,
+  Row,
+  Col,
+  ButtonToolbar
+} from "react-bootstrap";
 import axios from "axios";
 import Rating from "react-rating";
 import { Link } from "react-router-dom";
@@ -62,9 +70,22 @@ class BookDetails extends Component {
             </Row>
           </Panel.Body>
           <Panel.Footer>
-            <Link to="/">
-              <Button>Go Back</Button>
-            </Link>
+            <ButtonToolbar>
+              <Link to="/">
+                <Button>Go Back</Button>
+              </Link>
+              <Link to="/cart">
+                <Button
+                  bsStyle="primary"
+                  className="pull-right"
+                  onClick={() => {
+                    this.props.addItem(this.state.book);
+                  }}
+                >
+                  Add to Cart
+                </Button>
+              </Link>
+            </ButtonToolbar>
           </Panel.Footer>
         </Panel>
       );

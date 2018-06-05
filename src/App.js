@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import BookList from "./components/books-list";
 import BookDetails from "./components/book-details";
+import Cart from "./components/cart";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {
   Navbar,
@@ -22,7 +23,8 @@ class App extends Component {
       searchTerm: "",
       currentBookId: null,
       books: null,
-      term: "react"
+      term: "react",
+      cartItems: []
     };
   }
 
@@ -36,6 +38,14 @@ class App extends Component {
     this.setState({
       books: response.data,
       term: term
+    });
+  };
+
+  addItem = item => {
+    const newItems = [...this.state.cartItems];
+    newItems.push(item);
+    this.setState({
+      cartItems: newItems
     });
   };
 
@@ -99,21 +109,23 @@ class App extends Component {
                 placeholder="Search"
               />
             </FormGroup>{" "}
-            <Button
-              type="submit"
-              onClick={() => this.setTerm(this.state.searchTerm)}
-            >
-              Search
-            </Button>
+            <Link to="/">
+              <Button
+                type="submit"
+                onClick={() => this.setTerm(this.state.searchTerm)}
+              >
+                Search
+              </Button>
+            </Link>
           </Navbar.Form>
           <Navbar.Text>
             Hello user: <Navbar.Link href="#">Mark Otto</Navbar.Link>
           </Navbar.Text>
           <Navbar.Text pullRight>
-            <span className="icon-wrapper">
+            <Link className="icon-wrapper" to="/cart">
               <i className="fa fa-shopping-cart" aria-hidden="true" />
-              <span className="badge">2</span>
-            </span>
+              <span className="badge">{this.state.cartItems.length}</span>
+            </Link>
           </Navbar.Text>
         </Navbar.Collapse>
       </Navbar>
@@ -128,7 +140,15 @@ class App extends Component {
         <Switch>
           <Route
             path="/book/:id"
-            component={props => <BookDetails {...props} />}
+            component={props => (
+              <BookDetails addItem={this.addItem} {...props} />
+            )}
+          />
+          <Route
+            path="/cart"
+            component={props => (
+              <Cart {...props} cartItems={this.state.cartItems} />
+            )}
           />
           <Route
             component={() => <BookList books={this.state.books.books} />}
