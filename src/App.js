@@ -94,7 +94,7 @@ class App extends Component {
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#home">My first awesome App</a>
+            <Link to="/">My first awesome App</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
@@ -147,7 +147,15 @@ class App extends Component {
           <Route
             path="/cart"
             component={props => (
-              <Cart {...props} cartItems={this.state.cartItems} />
+              <Cart
+                {...props}
+                cartItems={this.state.cartItems}
+                clearCart={() =>
+                  this.setState({
+                    cartItems: []
+                  })
+                }
+              />
             )}
           />
           <Route

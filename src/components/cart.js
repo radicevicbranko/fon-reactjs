@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Panel, Table, Button, ButtonToolbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 class Cart extends Component {
   render() {
@@ -35,7 +36,11 @@ class Cart extends Component {
               <Link to="/">
                 <Button>Continue shopping</Button>
               </Link>
-              <Button className="pull-right" bsStyle="primary">
+              <Button
+                className="pull-right"
+                onClick={this.placeOrder}
+                bsStyle="primary"
+              >
                 Place Order
               </Button>
             </ButtonToolbar>
@@ -45,6 +50,13 @@ class Cart extends Component {
     }
     return <div>Your cart is empty.</div>;
   }
+
+  placeOrder = async () => {
+    const result = await axios.post("/place-order", this.props.cartItems);
+    if (result.status === 200) {
+      this.props.clearCart();
+    }
+  };
 }
 
 export default Cart;
