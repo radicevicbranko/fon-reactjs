@@ -67,6 +67,11 @@ class BookDetails extends Component {
             <Link to="/">
               <Button>Go Back</Button>
             </Link>
+            <Link to="/cart">
+              <Button onClick={() => this.props.addToCart(this.state.book)}>
+                Add to cart
+              </Button>
+            </Link>
           </Panel.Footer>
         </Panel>
       );

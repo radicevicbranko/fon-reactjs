@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import "./App.css";
 import BookList from "./components/books-list";
 import BookDetails from "./components/book-details";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Cart from "./components/cart";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import {
   Navbar,
   FormGroup,
@@ -18,11 +19,19 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      currentBookId: null,
       books: null,
-      term: "react"
+      term: "react",
+      searchTerm: "",
+      cartItems: []
     };
   }
+
+  addToCart = book => {
+    let newCartItems = [...this.state.cartItems, book];
+    this.setState({
+      cartItems: newCartItems
+    });
+  };
 
   async componentDidMount() {
     await this.setTerm(this.state.term);
@@ -38,19 +47,21 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        {this.showNavbar()}
-        <Grid>
-          <Row>
-            <Col xs={12} md={2}>
-              {this.showLeftMenu()}
-            </Col>
-            <Col xs={12} md={10}>
-              {this.showContent()}
-            </Col>
-          </Row>
-        </Grid>
-      </div>
+      <Router>
+        <div className="App">
+          {this.showNavbar()}
+          <Grid>
+            <Row>
+              <Col xs={12} md={2}>
+                {this.showLeftMenu()}
+              </Col>
+              <Col xs={12} md={10}>
+                {this.showContent()}
+              </Col>
+            </Row>
+          </Grid>
+        </div>
+      </Router>
     );
   }
   selectBooks = key => {
@@ -64,12 +75,21 @@ class App extends Component {
         activeKey={this.state.term}
         onSelect={this.selectBooks}
       >
-        <NavItem eventKey={"react"}>React JS</NavItem>
-        <NavItem eventKey={"javascript"}>Java Script</NavItem>
+        <NavItem componentClass={Link} to="/" href="/" eventKey={"react"}>
+          React JS
+        </NavItem>
+        <NavItem componentClass={Link} to="/" href="/" eventKey={"javascript"}>
+          Java Script
+        </NavItem>
       </Nav>
     );
   };
 
+  changeSearchTerm = event => {
+    this.setState({
+      searchTerm: event.currentTarget.value
+    });
+  };
   showNavbar = () => {
     return (
       <Navbar>
@@ -82,9 +102,19 @@ class App extends Component {
         <Navbar.Collapse>
           <Navbar.Form pullLeft>
             <FormGroup>
-              <FormControl type="text" placeholder="Search" />
+              <FormControl
+                onChange={e => this.changeSearchTerm(e)}
+                value={this.state.searchTerm}
+                type="text"
+                placeholder="Search"
+              />
             </FormGroup>{" "}
-            <Button type="submit">Search</Button>
+            <Button
+              onClick={() => this.setTerm(this.state.searchTerm)}
+              type="submit"
+            >
+              Search
+            </Button>
           </Navbar.Form>
           <Navbar.Text>
             Hello user: <Navbar.Link href="#">Mark Otto</Navbar.Link>
@@ -92,7 +122,7 @@ class App extends Component {
           <Navbar.Text pullRight>
             <span className="icon-wrapper">
               <i className="fa fa-shopping-cart" aria-hidden="true" />
-              <span className="badge">2</span>
+              <span className="badge">{this.state.cartItems.length}</span>
             </span>
           </Navbar.Text>
         </Navbar.Collapse>
@@ -104,19 +134,25 @@ class App extends Component {
       return <div>Loading...</div>;
     }
     return (
-      <Router>
-        <div>
-          <Switch>
-            <Route
-              path="/book/:id"
-              component={props => <BookDetails {...props} />}
-            />
-            <Route
-              component={() => <BookList books={this.state.books.books} />}
-            />
-          </Switch>
-        </div>
-      </Router>
+      <div>
+        <Switch>
+          <Route
+            path="/book/:id"
+            component={props => (
+              <BookDetails {...props} addToCart={this.addToCart} />
+            )}
+          />
+          <Route
+            path="/cart"
+            component={props => (
+              <Cart {...props} cartItems={this.state.cartItems} />
+            )}
+          />
+          <Route
+            component={() => <BookList books={this.state.books.books} />}
+          />
+        </Switch>
+      </div>
     );
   };
 }
