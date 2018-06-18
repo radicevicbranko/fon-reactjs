@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 class Cart extends Component {
   render() {
-    const { cartItems } = this.props
+    const { cartItems } = this.props;
     if (cartItems.length > 0) {
       return (
         <Panel>

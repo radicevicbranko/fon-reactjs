@@ -17,7 +17,7 @@ class BookDetails extends Component {
   }
 
   render() {
-    const { currentBook, fetching } = this.props
+    const { currentBook, fetching } = this.props;
     if (!fetching) {
       return (
         <Panel>

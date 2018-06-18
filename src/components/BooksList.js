@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Book from "./book";
+import Book from "./Book";
 import { Row, Col } from "react-bootstrap";
 
 class BookList extends Component {
@@ -10,7 +10,7 @@ class BookList extends Component {
   }
 
   render() {
-    const { books, fetching } = this.props
+    const { books, fetching } = this.props;
     return <Row>{
       fetching ?
         'Loading...' :
