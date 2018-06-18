@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
-import BookList from "./components/books-list";
-import BookDetails from "./components/book-details";
-import Cart from "./components/cart";
+import BookList from "./containers/BooksListContainer";
+import BookDetails from "./containers/BookDetailsContainer";
+import Cart from "./containers/CartContainer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {
   Navbar,
@@ -12,43 +12,10 @@ import {
   Nav,
   NavItem
 } from "react-bootstrap";
-import axios from "axios";
 import { Grid, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      searchTerm: "",
-      currentBookId: null,
-      books: null,
-      term: "react",
-      cartItems: []
-    };
-  }
-
-  async componentDidMount() {
-    await this.setTerm(this.state.term);
-  }
-
-  setTerm = async term => {
-    term = term || "react";
-    const response = await axios.get("/api/1.0/search/" + term);
-    this.setState({
-      books: response.data,
-      term: term
-    });
-  };
-
-  addItem = item => {
-    const newItems = [...this.state.cartItems];
-    newItems.push(item);
-    this.setState({
-      cartItems: newItems
-    });
-  };
-
   render() {
     return (
       <Router>
@@ -68,15 +35,13 @@ class App extends Component {
       </Router>
     );
   }
-  selectBooks = key => {
-    this.setTerm(key);
-  };
+
   showLeftMenu = () => {
     return (
       <Nav
         bsStyle="pills"
         stacked
-        activeKey={this.state.term}
+        activeKey={'react'}
         onSelect={this.selectBooks}
       >
         <NavItem eventKey={"react"} componentClass={Link} to="/" href="/">
@@ -86,7 +51,7 @@ class App extends Component {
           Java Script
         </NavItem>
       </Nav>
-    );
+    )
   };
 
   showNavbar = () => {
@@ -104,7 +69,7 @@ class App extends Component {
               <FormControl
                 type="text"
                 name="searchTerm"
-                value={this.state.searchTerm}
+                value={''}
                 onChange={e => this.setState({ searchTerm: e.target.value })}
                 placeholder="Search"
               />
@@ -112,7 +77,7 @@ class App extends Component {
             <Link to="/">
               <Button
                 type="submit"
-                onClick={() => this.setTerm(this.state.searchTerm)}
+                onClick={() => this.setTerm('')}
               >
                 Search
               </Button>
@@ -124,7 +89,7 @@ class App extends Component {
           <Navbar.Text pullRight>
             <Link className="icon-wrapper" to="/cart">
               <i className="fa fa-shopping-cart" aria-hidden="true" />
-              <span className="badge">{this.state.cartItems.length}</span>
+              <span className="badge">{''}</span>
             </Link>
           </Navbar.Text>
         </Navbar.Collapse>
@@ -132,39 +97,24 @@ class App extends Component {
     );
   };
   showContent = () => {
-    if (!this.state.books) {
-      return <div>Loading...</div>;
-    }
     return (
       <div>
         <Switch>
           <Route
             path="/book/:id"
-            component={props => (
-              <BookDetails addItem={this.addItem} {...props} />
-            )}
+            component={BookDetails}
           />
           <Route
             path="/cart"
-            component={props => (
-              <Cart
-                {...props}
-                cartItems={this.state.cartItems}
-                clearCart={() =>
-                  this.setState({
-                    cartItems: []
-                  })
-                }
-              />
-            )}
+            component={Cart}
           />
           <Route
-            component={() => <BookList books={this.state.books.books} />}
+            component={BookList}
           />
         </Switch>
       </div>
-    );
-  };
+    )
+  }
 }
 
-export default App;
+export default App

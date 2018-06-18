@@ -8,46 +8,35 @@ import {
   Col,
   ButtonToolbar
 } from "react-bootstrap";
-import axios from "axios";
 import Rating from "react-rating";
 import { Link } from "react-router-dom";
 class BookDetails extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      book: null
-    };
-  }
 
-  async componentDidMount() {
-    const response = await axios.get(
-      "/api/1.0/books/" + this.props.match.params.id
-    );
-    this.setState({
-      book: response.data
-    });
+  componentDidMount() {
+    this.props.getBookDetails(this.props.match.params.id)
   }
 
   render() {
-    if (this.state.book) {
+    const { currentBook, fetching } = this.props
+    if (!fetching) {
       return (
         <Panel>
-          <Panel.Heading>{this.state.book.title}</Panel.Heading>
+          <Panel.Heading>{currentBook.title}</Panel.Heading>
           <Panel.Body>
             <Row>
               <Col xs={12} md={5}>
-                <Image src={this.state.book.image} />
+                <Image src={currentBook.image} />
               </Col>
               <Col xs={12} md={7}>
                 <Table striped bordered condensed hover>
                   <tbody>
                     <tr>
                       <td>Price</td>
-                      <td>{this.state.book.price}</td>
+                      <td>{currentBook.price}</td>
                     </tr>
                     <tr>
                       <td>Authors</td>
-                      <td>{this.state.book.authors}</td>
+                      <td>{currentBook.authors}</td>
                     </tr>
                     <tr>
                       <td>Rating</td>
@@ -56,13 +45,13 @@ class BookDetails extends Component {
                           readonly
                           emptySymbol="fa fa-star-o fa-2x"
                           fullSymbol="fa fa-star fa-2x"
-                          initialRating={parseInt(this.state.book.rating, 10)}
+                          initialRating={parseInt(currentBook.rating, 10)}
                         />
                       </td>
                     </tr>
                     <tr>
                       <td>Description</td>
-                      <td>{this.state.book.desc}</td>
+                      <td>{currentBook.desc}</td>
                     </tr>
                   </tbody>
                 </Table>
@@ -79,7 +68,7 @@ class BookDetails extends Component {
                   bsStyle="primary"
                   className="pull-right"
                   onClick={() => {
-                    this.props.addItem(this.state.book);
+                    this.props.addToCart(currentBook)
                   }}
                 >
                   Add to Cart
@@ -88,10 +77,10 @@ class BookDetails extends Component {
             </ButtonToolbar>
           </Panel.Footer>
         </Panel>
-      );
+      )
     }
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 }
 
-export default BookDetails;
+export default BookDetails
