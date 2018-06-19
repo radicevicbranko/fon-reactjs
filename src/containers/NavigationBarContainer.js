@@ -1,17 +1,16 @@
 import { connect } from 'react-redux'
-import BookList from "../components/BooksList";
+import NavigationBar from "../components/NavigationBar"
 import { loadBooks } from '../redux/actions/books'
 
 const mapStateToProps = state => ({
-  books: state.books.booksList,
-  fetching: state.books.fetching
+  cartItems: state.cart.cartItems
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadBooks: (term) => dispatch(loadBooks(term))
-});
+    loadBooks: (term) => dispatch(loadBooks(term))
+})
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(BookList)
+)(NavigationBar)

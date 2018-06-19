@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import BookDetails from "../components/BookDetails";
-import { addToCart, getBookDetails } from '../redux/actions'
+import { getBookDetails } from '../redux/actions/books'
+import { addToCart } from '../redux/actions/cart'
 
 const mapStateToProps = state => ({
   currentBook: state.books.currentBook,

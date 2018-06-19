@@ -3,7 +3,8 @@ import { BookActions } from '../actions/actionTypes'
 const INITIAL_STATE = {
     booksList: [],
     fetching: true,
-    currentBook: {}
+    currentBook: {},
+    searchTerm: ''
 }
 
 const booksReducer = (state = INITIAL_STATE, action) => {
@@ -25,6 +26,11 @@ const booksReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 fetching: false,
                 currentBook: action.book
+            }
+        case BookActions.SET_SEARCH_TERM:
+            return {
+                ...state,
+                searchTerm: action.term
             }
         default:
             return state
