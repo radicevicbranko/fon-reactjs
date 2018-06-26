@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Panel, Table, Button, ButtonToolbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 class Cart extends Component {
   render() {
-    if (this.props.cartItems.length > 0) {
+    const { cartItems } = this.props;
+    if (cartItems.length > 0) {
       return (
         <Panel>
           <Panel.Heading>Cart</Panel.Heading>
@@ -19,7 +19,7 @@ class Cart extends Component {
                 </tr>
               </thead>
               <tbody>
-                {this.props.cartItems.map((book, index) => {
+                {cartItems.map((book, index) => {
                   return (
                     <tr key={book.isbn13}>
                       <td>{index + 1}</td>
@@ -38,7 +38,7 @@ class Cart extends Component {
               </Link>
               <Button
                 className="pull-right"
-                onClick={this.placeOrder}
+                onClick={this.props.placeOrder}
                 bsStyle="primary"
               >
                 Place Order
@@ -50,13 +50,6 @@ class Cart extends Component {
     }
     return <div>Your cart is empty.</div>;
   }
-
-  placeOrder = async () => {
-    const result = await axios.post("/place-order", this.props.cartItems);
-    if (result.status === 200) {
-      this.props.clearCart();
-    }
-  };
 }
 
 export default Cart;
