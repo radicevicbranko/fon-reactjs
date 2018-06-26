@@ -46,10 +46,10 @@ class Cart extends Component {
             </ButtonToolbar>
           </Panel.Footer>
         </Panel>
-      )
+      );
     }
-    return <div>Your cart is empty.</div>
+    return <div>Your cart is empty.</div>;
   }
 }
 
-export default Cart
+export default Cart;

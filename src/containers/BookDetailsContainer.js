@@ -1,7 +1,7 @@
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import BookDetails from "../components/BookDetails";
-import { getBookDetails } from '../redux/actions/books'
-import { addToCart } from '../redux/actions/cart'
+import { getBookDetails } from "../redux/actions/books";
+import { addToCart } from "../redux/actions/cart";
 
 const mapStateToProps = state => ({
   currentBook: state.books.currentBook,
@@ -16,4 +16,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(BookDetails)
+)(BookDetails);

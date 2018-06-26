@@ -1,6 +1,6 @@
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import Cart from "../components/Cart";
-import { placeOrder } from '../redux/actions/cart'
+import { placeOrder } from "../redux/actions/cart";
 
 const mapStateToProps = state => ({
   cartItems: state.cart.cartItems
@@ -13,4 +13,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Cart)
+)(Cart);

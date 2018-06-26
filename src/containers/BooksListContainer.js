@@ -1,6 +1,6 @@
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import BookList from "../components/BooksList";
-import { loadBooks } from '../redux/actions/books'
+import { loadBooks } from "../redux/actions/books";
 
 const mapStateToProps = state => ({
   books: state.books.booksList,
@@ -8,10 +8,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadBooks: (term) => dispatch(loadBooks(term))
+  loadBooks: term => dispatch(loadBooks(term))
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(BookList)
+)(BookList);

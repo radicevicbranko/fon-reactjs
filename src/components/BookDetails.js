@@ -11,9 +11,8 @@ import {
 import Rating from "react-rating";
 import { Link } from "react-router-dom";
 class BookDetails extends Component {
-
   componentDidMount() {
-    this.props.getBookDetails(this.props.match.params.id)
+    this.props.getBookDetails(this.props.match.params.id);
   }
 
   render() {
@@ -68,7 +67,7 @@ class BookDetails extends Component {
                   bsStyle="primary"
                   className="pull-right"
                   onClick={() => {
-                    this.props.addToCart(currentBook)
+                    this.props.addToCart(currentBook);
                   }}
                 >
                   Add to Cart
@@ -77,10 +76,10 @@ class BookDetails extends Component {
             </ButtonToolbar>
           </Panel.Footer>
         </Panel>
-      )
+      );
     }
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 }
 
-export default BookDetails
+export default BookDetails;

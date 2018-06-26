@@ -3,10 +3,10 @@ import "./App.css";
 import BookList from "./containers/BooksListContainer";
 import BookDetails from "./containers/BookDetailsContainer";
 import Cart from "./containers/CartContainer";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
-import { Grid, Row, Col } from "react-bootstrap"
-import NavigationBar from "./containers/NavigationBarContainer"
-import LeftMenu from "./containers/LeftMenuContainer"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Grid, Row, Col } from "react-bootstrap";
+import NavigationBar from "./containers/NavigationBarContainer";
+import LeftMenu from "./containers/LeftMenuContainer";
 
 class App extends Component {
   render() {
@@ -33,21 +33,13 @@ class App extends Component {
     return (
       <div>
         <Switch>
-          <Route
-            path="/book/:id"
-            component={BookDetails}
-          />
-          <Route
-            path="/cart"
-            component={Cart}
-          />
-          <Route
-            component={BookList}
-          />
+          <Route path="/book/:id" component={BookDetails} />
+          <Route path="/cart" component={Cart} />
+          <Route component={BookList} />
         </Switch>
       </div>
-    )
-  }
+    );
+  };
 }
 
-export default App
+export default App;
